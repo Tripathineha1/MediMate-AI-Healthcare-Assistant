@@ -1,5 +1,20 @@
 :root {
-    --headerHeight: 4rem
+    --primary: #2563EB;
+    --primary-light: #eff6ff;
+    --primary-dark: #1d4ed8;
+    --bg-chat: #f8fafc;
+    --bg-card: #ffffff;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --severity-high: #ef4444;
+    --severity-medium: #f59e0b;
+    --severity-low: #22c55e;
+    
+    /* Sidebar colors */
+    --sidebar-bg: #0f172a;
+    --sidebar-text: #f8fafc;
+    --sidebar-hover: #1e293b;
+    --sidebar-active: #2563EB;
 }
 
 input:focus {
@@ -9,129 +24,805 @@ input:focus {
 .mainChatContainer {
     display: flex;
     flex-direction: row;
-    height: 100%;
-    top: 0;
-    bottom: 0;
-    flex-grow: 1;
+    height: calc(100vh - 5rem);
+    margin-top: 5rem;
+    width: 100vw;
+    max-width: 100%;
+    background-color: var(--bg-chat);
 }
 
-.chatSelectPaneContainer, .chatPaneContainer {
-    background-color: white;
-    height: inherit;
-    position: relative;
-}
-
+/* Sidebar Styles */
 .chatSelectPaneContainer {
-    width: 20%;
+    width: 280px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    padding: 1.25rem;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    z-index: 10;
 }
 
+.newChatBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.85rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+}
+
+.newChatBtn:hover {
+    background: linear-gradient(135deg, #0369a1, #075985);
+    transform: translateY(-1px);
+}
+
+.btnIcon {
+    font-size: 1.1rem;
+}
+
+.recentChatsTitle {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+    padding-left: 0.25rem;
+}
+
+.sessionsList {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-right: 0.25rem;
+}
+
+.sessionsList::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sessionsList::-webkit-scrollbar-thumb {
+    background-color: #475569;
+    border-radius: 4px;
+}
+
+.noSessionsText {
+    font-size: 0.9rem;
+    color: #64748b;
+    text-align: center;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+.sessionItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0.85rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    color: #cbd5e1;
+}
+
+.sessionItem:hover {
+    background-color: var(--sidebar-hover);
+    color: white;
+}
+
+.sessionItem.active {
+    background-color: var(--sidebar-active);
+    color: white;
+    font-weight: 600;
+}
+
+.sessionIcon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    color: #94a3b8;
+}
+
+.sessionItem.active .sessionIcon {
+    color: white;
+}
+
+.sessionTitleText {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    padding-right: 1.5rem;
+}
+
+.deleteSessionBtn {
+    position: absolute;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+}
+
+.sessionItem:hover .deleteSessionBtn {
+    opacity: 1;
+}
+
+.deleteSessionBtn:hover {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Start Chat Button on splash */
+.startChatBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #0188df, #006eb5);
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(1, 136, 223, 0.3);
+    transition: all 0.2s ease;
+    margin-top: 1.5rem;
+}
+
+.startChatBtn:hover {
+    background: linear-gradient(135deg, #006eb5, #00568d);
+    transform: translateY(-2px);
+}
+
+/* Chat Pane Layout */
 .chatPaneContainer {
-    background-color: whitesmoke;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-
+    height: 100%;
+    position: relative;
+    background-color: var(--bg-chat);
 }
 
 .introTextContainer {
     text-align: center;
-    height: fit-content;
     margin: auto;
+    max-width: 600px;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease-out;
 }
 
-.introTextContainer span {
-    color: #0188df;
+.introTextContainer h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
 }
 
-.InputBoxContainer {
-    position: relative;
-    width: inherit;
-    padding: 1rem 0;
-    margin: 0 1rem;
-
+.introTextContainer h1 span {
+    color: var(--primary);
 }
 
-.InputBox {
-    margin: 0;
+.introTextContainer h3 {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.MessagesContainer {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    scroll-behavior: smooth;
+}
+
+.MessageBoxContainer {
+    display: flex;
+    gap: 1rem;
+    max-width: 80%;
+    animation: slideUp 0.3s ease-out;
+}
+
+.MessageBoxContainer.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.MessageBoxContainer.bot {
+    align-self: flex-start;
+}
+
+.ProfileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563EB, #14B8A6);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);
+    flex-shrink: 0;
+}
+
+.ProfileContainer.user {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.15);
+}
+
+.ProfileContainer img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.MessageBodyContainer {
+    padding: 1.25rem;
+    border-radius: 1rem;
     font-size: 1rem;
+    line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: fit-content;
+    max-width: 100%;
+    word-wrap: break-word;
 }
-.InputBox::placeholder {
-    color: grey;
+
+.MessageBoxContainer.user .MessageBodyContainer {
+    background: linear-gradient(135deg, #2563EB, #1d4ed8);
+    color: white;
+    border-top-right-radius: 0.25rem;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
+}
+
+.MessageBoxContainer.bot .MessageBodyContainer {
+    background-color: var(--bg-card);
+    color: var(--text-dark);
+    border-top-left-radius: 0.25rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    width: 100%;
+    max-width: 650px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Medical Report Card Styles */
+.medical-report-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.medical-card-header {
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.download-pdf-btn {
+    background-color: var(--primary-light);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-dark);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.2s ease;
+}
+
+.download-pdf-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 168, 204, 0.3);
+}
+
+.medical-card-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+}
+
+/* Emergency Banner with pulse */
+.emergency-warning-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgba(254, 226, 226, 0.75);
+    border: 2px solid #EF4444;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+    animation: pulseBorder 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseBorder {
+    0%, 100% { border-color: #EF4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.25); }
+    50% { border-color: #dc2626; box-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
+}
+
+.emergency-icon {
+    font-size: 1.8rem;
+    animation: rotateWarning 1s ease-in-out infinite alternate;
+}
+
+@keyframes rotateWarning {
+    from { transform: rotate(-10deg); }
+    to { transform: rotate(10deg); }
+}
+
+.emergency-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.emergency-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #991b1b;
+    margin-bottom: 0.15rem;
+    letter-spacing: 0.5px;
+}
+
+.emergency-subtitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #7f1d1d;
+    line-height: 1.4;
+}
+
+/* Metadata Grid */
+.medical-meta-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background-color: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.meta-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.meta-value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.highlight-condition {
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.meta-row-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.meta-item-half {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Indicators */
+.severity-indicator {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    width: fit-content;
+}
+
+.severity-indicator.high {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+.severity-indicator.moderate {
+    background-color: #fef3c7;
+    color: #f59e0b;
+}
+
+.severity-indicator.low, .severity-indicator.mild {
+    background-color: #d1fae5;
+    color: #10b981;
+}
+
+/* Risk Score Progress Bar */
+.risk-score-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.risk-bar-bg {
+    flex-grow: 1;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.risk-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out;
+}
+
+.risk-bar-fill.risk-level-low {
+    background-color: #10b981;
+}
+
+.risk-bar-fill.risk-level-medium {
+    background-color: #f59e0b;
+}
+
+.risk-bar-fill.risk-level-high {
+    background-color: #ef4444;
+}
+
+.risk-score-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    white-space: nowrap;
+}
+
+/* Care Lists */
+.report-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.report-section h5 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.report-section ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--text-dark);
+}
+
+.report-section li {
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+}
+
+.report-section.danger-section h5 {
+    color: #b91c1c;
+}
+
+.report-section.danger-section ul {
+    color: #7f1d1d;
+    background-color: #fff5f5;
+    padding: 0.75rem 0.75rem 0.75rem 2rem;
+    border-radius: 0.5rem;
+    border-left: 3px solid #ef4444;
+}
+
+/* Medical Disclaimer */
+.medical-disclaimer {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 0.5rem;
+    line-height: 1.4;
+    margin-top: 0.5rem;
+}
+
+/* Non-medical alert message */
+.non-medical-message {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Input Area styling */
+.InputBoxContainer {
+    padding: 1.5rem;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
 }
 
 .InputForm {
     display: flex;
     flex-direction: row;
-    background-color: lightgray;
-    border-radius: 8px;align-items: center;
+    background-color: var(--bg-card);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    align-items: center;
+    transition: all 0.3s ease;
 }
 
-.MessagesContainer {
-    width: inherit;
-    display: flex;
-    flex-direction: column;
-    margin: 0 10px;
-    overflow-y: scroll;
-
+.InputForm:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 10px 25px rgba(1, 136, 223, 0.15);
 }
 
-#Messageanchor {
-    overflow-anchor: auto;
-    height: 1px;
-}
-
-.MessageBoxContainer {
-    overflow-anchor: none;
-    min-width: 5rem;
-    margin: 10px 0;
-    display: flex;
-    flex-direction: row;
-    /* justify-content: left/right; */
-
-
-}
-
-.MessageBodyContainer {
-    max-width: 60%;
-    width: fit-content;
-    background-color: #0188DF;
-    height: fit-content;
-    word-wrap: break-word;
-    padding: 10px;
-    border-radius: 8px;
-    color: whitesmoke;
+.InputBox {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    padding: 0.75rem 0;
     font-size: 1rem;
-    white-space: pre-wrap;
-
+    color: var(--text-dark);
 }
 
-.ProfileContainer {
-    border-radius: 100%;
-    width: 50px;
-    height: 47px;
-    background-color: #0188DF;
-    /* margin-right: 5px; */
-}
-
-.header {
-    width: 100vw;
-    height: var(--headerHeight);
-    background-color: brown;
+.InputForm button {
+    background-color: var(--primary);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
 }
 
-/* media query */
+.InputForm button:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.05);
+}
 
-@media only screen and (max-width: 600px) {
+.InputForm button img {
+    filter: invert(1);
+    height: 18px;
+    width: 18px;
+}
+
+/* Loading/Typing Indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.25rem;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0s;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
     .chatSelectPaneContainer {
-        display: none;
+        display: none; /* Collapse sidebar on mobile to prioritize screen space */
     }
+    .MessageBoxContainer {
+        max-width: 90%;
+    }
+    .introTextContainer h1 {
+        font-size: 2rem;
+    }
+    .MessagesContainer {
+        padding: 1rem;
+    }
+    .meta-row-split {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+}
 
-    .header_head {
-        height: auto;
-        width: 250px;
+/* Welcome Feature Cards Grid */
+.welcome-features-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 800px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    flex: 1 1 200px;
+    max-width: 240px;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(1, 136, 223, 0.1);
+}
+
+.feature-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.feature-card h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Quick Suggestion Chips */
+.suggestion-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.suggestion-chip {
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 2rem;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.suggestion-chip:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.15);
+}
+
+/* UI/UX Animations & Interactions Pass */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
     }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 0.4s ease-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.08) !important;
+}
+
+.medical-report-card {
+    animation: fadeUp 0.45s ease-out;
+}
+
+.introTextContainer {
+    animation: fadeUp 0.5s ease-out;
+}
+
+.newChatBtn, .startChatBtn, .download-pdf-btn, .desktopMenuBtn, .InputForm button {
+    transition: all 0.3s ease !important;
+}
+
+.newChatBtn:hover, .startChatBtn:hover, .download-pdf-btn:hover, .desktopMenuBtn:hover, .InputForm button:hover:not(:disabled) {
+    transform: translateY(-2px);
 }

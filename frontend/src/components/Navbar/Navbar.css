@@ -1,5 +1,7 @@
-.navbar{
-    background: #fff;
+.navbar {
+    background: rgba(224, 242, 254, 0.65) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
     height: 5rem;
     width: 100vw;
     max-width: 100%;
@@ -10,49 +12,77 @@
     justify-content: space-between;
     position: fixed;
     top: 0;
-    z-index: 3;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.3s ease;
 }
 .logoText{
     font-size: 2rem;
-    color: #000;
+    font-weight: 800;
+    color: #1e293b;
+    text-decoration: none;
 }
 .logoText span{
-    color: #0188DF;
+    color: #2563EB;
 }
-.desktopMenuListItem{
-    margin: 1rem;
+.desktopMenuListItem {
+    margin: 0 0.5rem;
     cursor: pointer;
-    font-size: 20px;
-    color: #000;
+    font-size: 15px;
+    font-weight: 600;
+    color: #475569;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent !important;
 }
-.desktopMenuListItem:hover{
-    color: #0188DF;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid #0188DF;
+.desktopMenuListItem:hover {
+    color: #2563EB;
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.45) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+    transform: translateY(-1px);
 }
-.desktopMenuBtn{
-    background: #0188DF;
+.desktopMenuBtn {
+    background: #2563EB;
     color: #fff;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 2rem;
+    font-weight: 700;
+    font-size: 0.9rem;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+    transition: all 0.3s ease;
 }
-.desktopMenuImg{
+.desktopMenuBtn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+.desktopMenuImg {
     object-fit: cover;
     height: 1rem;
     width: 1rem;
-    margin: 1rem;
+    margin-right: 0.5rem;
     cursor: pointer;
 }
-.active{
-    color: #0188DF;
-    border-bottom: 3px solid #0188DF;
-    padding-bottom: 0.5rem;
+.active-route, .active {
+    color: #2563EB !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
 }
 .mobMenu{
     display: none;

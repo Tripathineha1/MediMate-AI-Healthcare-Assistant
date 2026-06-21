@@ -4,7 +4,7 @@ import './About.css'
 function About() {
   return (
     <>
-    <div className="about-heading" id='about'>
+      <div className="about-heading" id='about'>
         <h1>About Us</h1>
         <p>
           This section includes information about the authors of this website.
@@ -18,17 +18,17 @@ function About() {
           <div className="about-content">
             <h2>Hi there!</h2>
             <p>
-              We are a group of four programmers/friends currently doing our bachelors
-              from ADGITM(formerly NIEC) affiliated to GGSIPU.<br></br>
+              We are MCA students from AIMSR,
+              Mumbai University.
 
-              <b>Team Members </b> - <br></br>
+              This project was developed as an AI-powered healthcare assistant
+              to provide symptom analysis, health risk assessment,
+              and medical guidance using Google Gemini AI.<br></br>
 
-              Anish Hazra (@AnishHazra) - Frontend<br></br>
-              Lakshay Gulati (@LakshayGMZ) - Full Stack<br></br>
-              Dhruv Gera (@Dhruvgera) - Full Stack<br></br>
-              Vedant Arya (@martian0x80) - Backend/ML<br></br>
-
-
+              <b>Team Members:</b><br></br>
+              Aditya Dubey<br></br>
+              Preitika Nayak<br></br>
+              Neha Tripathi<br></br>
             </p>
           </div>
         </section>

@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://livthecode.lakshaygmz.repl.co/',
+        target: 'http://localhost:8081',
         rewrite: (path) => path.replace(/^\/api/, ''),
         changeOrigin:true,
         secure: false,

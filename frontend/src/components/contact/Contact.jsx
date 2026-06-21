@@ -11,10 +11,8 @@ function Contact() {
             <h3>Contact Us</h3>
 
             <p>
-              Phone: Lakshay Gulati - @LakshayGMZ <br />
-              Vedant - @martian0x80 <br />
-              Anish Hazra - @AnishHazra <br />
-              Dhruv Gera - @Dhruvgera
+              Email : 24/7.medimate@gmail.com <br />
+              Phone : +91998456667
             </p>
           </div>
           <div className="contact-right">

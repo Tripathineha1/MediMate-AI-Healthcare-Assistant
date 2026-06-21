@@ -2,12 +2,16 @@
   background: #fff;
 }
 
+.home .content {
+  animation: fadeUp 0.5s ease-out;
+}
+
 .home .content h2{
   font-size: 4rem;
   color: #354046;
 }
 .home .content h2 span{
-  color: #0188DF;
+  color: #2563EB;
 }
 .home .content h3{
   font-size: 1.4rem;
@@ -16,7 +20,7 @@
 .button{
   height: 3rem;
   width: 10rem;
-  background: #0188DF;
+  background: #2563EB;
   color: #fff;
   font-size: 1.3rem;
   border-radius: .5rem;
@@ -26,7 +30,7 @@
   z-index: 0;
   overflow: hidden;
   margin: 1rem 0;
-  transition: .2s linear;
+  transition: all 0.3s ease;
 }
 .button::before{
   content: "";
@@ -36,13 +40,25 @@
   width: 100%;
   background-color: #354046;
   z-index: -1;
+  transition: all 0.3s ease;
 }
 .button:hover:before{
   top: 0%;
 }
 .button:hover{
-  box-shadow: .1rem .5rem #0188DF,
-              0 .3rem .5rem rgba(0, 0, 0, .3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media screen and (max-width: 720px){
@@ -55,6 +71,4 @@
   .home .content h3{
     font-size: 1rem;
   }
-  
-  
 }
