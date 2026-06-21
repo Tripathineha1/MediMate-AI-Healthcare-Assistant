@@ -186,6 +186,7 @@ npm run dev
     *Place image at:* `/screenshots/chat_assistant.png`
 *   **Patient Analytics Dashboard**  
     *Place image at:* `/screenshots/dashboard.png`
+    
 
 ---
 
