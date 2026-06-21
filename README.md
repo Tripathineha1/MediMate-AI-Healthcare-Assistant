@@ -180,13 +180,21 @@ npm run dev
 
 ## 🖼️ Screenshots
 
-*   **Homepage Landing Panel**  
-    *Place image at:* `/screenshots/homepage.png`
-*   **Triage Chat Assistant**  
-    *Place image at:* `/screenshots/chat_assistant.png`
-*   **Patient Analytics Dashboard**  
-    *Place image at:* `/screenshots/dashboard.png`
-    
+## 📸 Screenshots
+
+### Homepage Landing Panel
+![Homepage](homepage.png)
+
+---
+
+### Triage Chat Assistant
+![Chat Assistant](chatscreenshot.png)
+
+---
+
+### Patient Analytics Dashboard
+![Dashboard](dashboard.png)
+
 
 ---
 
