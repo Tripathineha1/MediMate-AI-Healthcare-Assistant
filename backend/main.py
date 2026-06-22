@@ -83,4 +83,5 @@ If the query IS related to medical symptoms, health, first aid, or healthcare, r
         }), 500
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=8081, debug=True)
+    port = int(os.environ.get("PORT", 8081))
+    app.run(host="0.0.0.0", port=port)
